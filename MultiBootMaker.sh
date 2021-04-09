@@ -28,6 +28,7 @@ set -o nounset
 
 if [ -n "${DEBUG:-}" ] && [ "$DEBUG" = '1' ]; then
     set -o xtrace
+    unset DEBUG
 fi
 
 readonly __VERSION__='0.1alpha'
