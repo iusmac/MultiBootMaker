@@ -71,11 +71,19 @@ END
 
 main() {
     # Init {{{1
-    # Welcome message {{{2
-    echo -e "$__WELCOME_MSG__"
-
     # Check root perms {{{2
-    # }}}2
+    if [ $(id -u) -ne 0 ]; then
+        inform_err 'This script requires root privileges.'
+        exit 1
+    fi
+    if [ -n "$SUDO_USER" ]; then
+        readonly local __REAL_USER__="$SUDO_USER"
+    else
+        readonly local __REAL_USER__="$(whoami)"
+    fi
+
+    # Welcome message {{{2
+    echo -e "$__WELCOME_MSG__" # }}}2
 
     # Device management {{{1
 
