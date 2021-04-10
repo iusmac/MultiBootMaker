@@ -84,6 +84,43 @@ main() {
 }
 
 # Functions & utils {{{1
+inform() { # {{{2
+    local text="$1"
+    printf "$(inform_oneline "$text")\n"
+}
+
+inform_oneline() {
+    local text="$1"
+    printf "${__BOLD__}${__SECTION_ICON__} %s${__NC__}" "$text"
+}
+
+ask() { # {{{2
+    local text="$1"
+    printf "$(ask_oneline "$text")\n"
+}
+
+ask_oneline() {
+    local text="$1"
+    printf "${__BLUE__}${__SECTION_ICON__} %s${__NC__}" "$text"
+}
+
+inform_done() { # {{{2
+    local text="$1"
+    printf "${__GREEN__}${__SECTION_ICON__} %s${__NC__}\n" "$text"
+}
+
+inform_warn() { # {{{2
+    # TODO: get as the second (optional) parameter the exit code to display
+    local text="$1"
+    printf "${__ORANGE__}[Warning] %s${__NC__}\n" "$text"
+}
+
+inform_err() { # {{{2
+    # TODO: get as the second (optional) parameter the exit code to display
+    local text="$1"
+    printf "${__RED__}[Error] %s${__NC__}\n" "$text" >&2
+}
+
 is_number() { # {{{2
     local input="${1:-}"
     [[ "$input" =~ ^[0-9]+$ ]]
